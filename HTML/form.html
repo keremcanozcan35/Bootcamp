@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form Elementi</title>
+</head>
+<body>
+    <h1>iletişim formu</h1>
+    <form autocomplete="off">
+        <img src="https://cdn.pixabay.com/photo/2018/01/10/11/47/nature-3073677_960_720.jpg" alt="Image not found" width="200">
+        <div>
+            <label for="firstName">First Name</label>
+            <input type="text"  required id="firstName" minlength="3">
+        </div>
+        <div>
+            <label for="lastName">Last Name</label>
+            <input type="text"  required id="lastName">
+        </div>
+        <div>
+            <label for="email">Last Name</label>
+            <input type="email"  required id="email">
+        </div>
+        <div>
+            <input type="file" multiple id="file" hidden>
+            <label for="file">
+                Click for the upload image
+            </label>
+        </div>
+        <div>
+            <input type="checkbox"  id="rememberMe">
+            <label for="rememberMe">
+                Remember me!
+            </label>
+        </div>
+        <div>
+            <button type="submit" disabled="">Send</button>
+            <button type="button">Close</button>
+        </div>
+    </form>
+</body>
+</html>
