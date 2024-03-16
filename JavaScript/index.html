@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Start</title>
+</head>
+<body>
+    <h1>JavaScript Start</h1>
+    <h2 id="title">KC</h2>
+    <button onclick="output('HELLO KCO')">OUTPUT 1</button>
+
+
+    <script>
+
+      
+        console.log("hello world");
+        function output(word){
+            console.log(word);
+        }
+
+
+        const name = "KCO";
+        console.log(name);
+
+        function studentName(){
+            name;
+        }
+
+        const el = document.getElementById("title");
+
+        console.log(el.innerHTML);
+
+        el.innerHTML = 'KCO';
+        el.style.color = "red";
+        const h3El = document.createElement("h3");
+        h3El.innerHTML = "HELLO I AM H3";
+        el.appendChild(h3El);
+
+        el.innerHTML = "<h1>Denem</h1>";
+      
+    </script>
+</body>
+</html>

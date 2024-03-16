@@ -15,4 +15,7 @@
 -Bootstrap'e giriş yapıldı.
     Detaylar:
         - Bootstrap ile tablo ve navbar yapısına bakıldı.
-        - eCommerce örneği bootstrap ile yapıldı.        
+        - eCommerce örneği bootstrap ile yapıldı.
+        - KCO portfolio örneği mantık olarak başlandı bitti.
+        - E-bilet uygulaması java script ile yapıldı.
+        - Javascript giriş yapıldı. (DOM)     

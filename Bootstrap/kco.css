@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;    
+}
+
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    transition: all ease-in-out 0.5s;
+    z-index: 9997;
+    transition: all 0.5s;
+    padding: 0 15px;
+    background: #040b14;
+    overflow-y: auto;
+}
+
+
+
+
+@media screen and (max-width:970px) {
+    .main{
+        height: 124vh!important;
+
+    }
+
+    .mainLogo{
+        padding-left: 290px!important;
+        padding-top: 405;
+    }
+}
+
+@media screen and (max-width:863px) {
+
+
+    .mainLogo2{
+        
+    }
+
+    .mainText{
+        font-size:smaller;
+    }
+}
+
+@media screen and (max-width:811px) {
+
+
+    
+    .mainLogo2{
+        width: 100px;
+        height: 100px;
+    }
+
+    .mainText{
+        font-size:x-small;
+    }
+}
+
+
+@media screen and (max-width:738px) {
+    .customizedNavBar {
+        display: none;
+    }
+
+    .mainLogo2{
+        width: 120px;
+        height: 120px;
+    }
+}
+
+
+@media screen and (max-width:732px) {
+    .main{
+        height: 134vh!important;
+
+    }
+    .mainLogo2{
+        width: 120px;
+        height: 120px;
+        
+        
+    }
+}
+
+
+#grad1 {
+    height: 200px;
+
+    background-color: black; /* For browsers that do not support gradients */
+    background-image: linear-gradient(black, white);
+}
+
+
+nav li{
+    margin-bottom: 20px;
+}
+
+ul{
+    margin-top: 100px;
+}
+
+body {
+   
+    background-color: rgb(34, 34, 34);
+    background-repeat:   no-repeat;
+    background-position: center center;
+    min-height: 100%;
+   
+  }
+
+
+
