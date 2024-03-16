@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>spinners</h1>
+
+    <div class="spinner"></div>
+
+    <style>
+        .spinner{
+            width: 100px;
+            height: 30px;
+            border: 3px solid;
+            border-radius: 10px;
+            animation: spn normal  1.5s linear;
+        }
+
+        @keyframes spn{
+            0% {rotate: 0deg; transform: scale(0);}
+            100% {rotate: 180deg}
+        }
+    </style>
+    
+</body>
+</html>

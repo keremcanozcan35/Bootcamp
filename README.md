@@ -10,3 +10,9 @@
     Detaylar:
         - E ticaret örneği yapıldı. Div column responsive web design, nav bar ve hamburger bar işlendi.    
         - Sosyal medya örneğine başlandı. Display flex yerine ::after ile farklı bir yol izlendi. (Devam edilecek.)
+
+# 15.03.2024
+-Bootstrap'e giriş yapıldı.
+    Detaylar:
+        - Bootstrap ile tablo ve navbar yapısına bakıldı.
+        - eCommerce örneği bootstrap ile yapıldı.        
