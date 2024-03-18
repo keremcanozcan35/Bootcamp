@@ -1,0 +1,107 @@
+
+*{
+    font-family: "Poppins", sans-serif;
+   
+}
+
+@media screen and (max-width:1594px) {
+    .contact-me{
+        width: 48%!important;
+    }
+
+}
+
+@media screen and (max-width:1532px) {
+    .contact-me{
+        width: 46%!important;
+    }
+
+}
+
+@media screen and (max-width:1480px) {
+    .contact-me{
+        width: 100%!important;
+    }
+
+}
+@media screen and (max-width:1430px) {
+    .contact-me{
+        width: 100%!important;
+    }
+
+}
+
+@media screen and (max-width:1380px) {
+    .contact-me{
+        width: 100%!important;
+    }
+
+}
+
+@media screen and (max-width:1336px) {
+    .contact-me{
+       
+    }
+
+}
+
+
+@media screen and (max-width:1242px) {
+    .contact-me{
+        
+    }
+
+}
+
+
+
+@media screen and (max-width:992px) {
+    .contact-me{
+      
+    }
+
+}
+
+@media screen and (max-width:998px) {
+
+    .logo{
+        padding-left: 11rem!important;
+        padding-top: 10rem;
+        display: none;
+    }
+
+}
+
+
+@media screen and (max-width:674px) {
+
+    .logo{
+        padding-right: 22rem;
+    }
+
+}
+
+@media screen and (max-width:596px) {
+
+    .logo{
+        padding-right: 20rem!important;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

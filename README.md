@@ -19,3 +19,7 @@
         - KCO portfolio örneği mantık olarak başlandı bitti.
         - E-bilet uygulaması java script ile yapıldı.
         - Javascript giriş yapıldı. (DOM)     
+
+# 18.03.2024
+-Javascript ile devam edildi.
+    -todo ve personel uygulaması ile crud işlemleri gösterildi.
