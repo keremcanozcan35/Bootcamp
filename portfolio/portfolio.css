@@ -38,36 +38,26 @@
 
 }
 
-@media screen and (max-width:1336px) {
-    .contact-me{
+
+
+
+@media screen and (max-width:998px) {
+
+    .logo{
+        padding-left: 22rem!important;
+        padding-top: 10rem;
        
     }
 
 }
 
 
-@media screen and (max-width:1242px) {
-    .contact-me{
-        
-    }
-
-}
-
-
-
-@media screen and (max-width:992px) {
-    .contact-me{
-      
-    }
-
-}
-
-@media screen and (max-width:998px) {
+@media screen and (max-width:849px) {
 
     .logo{
-        padding-left: 11rem!important;
+        padding-left: 15rem!important;
         padding-top: 10rem;
-        display: none;
+       
     }
 
 }
@@ -77,14 +67,7 @@
 
     .logo{
         padding-right: 22rem;
-    }
-
-}
-
-@media screen and (max-width:596px) {
-
-    .logo{
-        padding-right: 20rem!important;
+        padding-left: 10rem!important;
     }
 
 }
@@ -93,7 +76,17 @@
 
 
 
-
+body {
+    width: 100%;
+    position: absolute;
+    top: 150px;
+    left: 0px;
+    background-color: #848484;
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+   
+}
 
 
 
