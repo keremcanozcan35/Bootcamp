@@ -31,31 +31,28 @@
         let id = 0;
         let updateId = 0;
 
-        function add(){
+        function add() {
             const el = document.getElementById("work");
             const value = el.value;
 
             const olElement = document.getElementById("olList");
-            olElement.innerHTML += 
-                            `<li id="${id}">${value} 
-                                <button class="update" onclick='get("${id}")'>
-                                    Güncelle
-                                </button>
-                                <button class="delete" onclick="remove('${id}')">
-                                    Sil
-                                </button>
-                            </li>`
+            olElement.innerHTML += `
+                                    <li id="${id}">${value} 
+                                        <button class="update" onclick='get("${id}")'>
+                                            Güncelle
+                                        </button>
+                                        <button class="delete" onclick="remove('${id}')">
+                                            Sil
+                                        </button>
+                                    </li>
+                                    `
 
             el.value = "";
             el.focus();
-
             id++;
-            //const liElement = document.createElement("li");
-            //liElement.innerText = value;
-            // olElement.appendChild(liElement);
         }
-    
-        function get(id){
+
+        function get(id) {
             const addDivEl = document.getElementById("addDiv");
             addDivEl.style.display = "none";
 
@@ -63,17 +60,17 @@
             updateDivEl.style.display = "block";
 
             const updateBtnEls = document.querySelectorAll(".update");
-            for(let index in updateBtnEls){                
-                if(index == "entries") break;
-                    updateBtnEls[index].style.display = "none";
+            for (let index in updateBtnEls) {
+                if (index == "entries") break;
+                updateBtnEls[index].style.display = "none";
             }
 
             const deleteBtnEls = document.querySelectorAll(".delete")
-            for(let index in deleteBtnEls){
-                if(index == "entries") break;
+            for (let index in deleteBtnEls) {
+                if (index == "entries") break;
                 deleteBtnEls[index].style.display = "none";
             }
-            
+
             const el = document.getElementById(id);
             let value = el.innerText;
 
@@ -82,9 +79,9 @@
             inputEl.value = value;
 
             updateId = id;
-        }   
+        }
 
-        function update(){
+        function update() {
             const el = document.getElementById(updateId);
             const inputEl = document.getElementById("updateWork");
             el.innerHTML = `${inputEl.value} 
@@ -103,19 +100,19 @@
             updateDivEl.style.display = "none";
 
             const updateBtnEls = document.querySelectorAll(".update");
-            for(let index in updateBtnEls){                
-                if(index == "entries") break;
-                    updateBtnEls[index].style.display = "inline";
+            for (let index in updateBtnEls) {
+                if (index == "entries") break;
+                updateBtnEls[index].style.display = "inline";
             }
 
             const deleteBtnEls = document.querySelectorAll(".delete")
-            for(let index in deleteBtnEls){
-                if(index == "entries") break;
+            for (let index in deleteBtnEls) {
+                if (index == "entries") break;
                 deleteBtnEls[index].style.display = "inline";
             }
         }
 
-        function remove(id){
+        function remove(id) {
             const el = document.getElementById(id);
             el.remove();
         }
