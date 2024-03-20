@@ -61,10 +61,13 @@
 
 
     <!-- Beni Değiştir -->
-    <div id="odevClass" style="display:flex; justify-content:center; align-items:center; gap: 15px;">
-        <h1 id="odevH1">Beni Değiştir</h1>
+    <div id="odevClass" style="display:none;">
+        
+            <h1 id="odevH1">Beni Değiştir</h1>
         <input type="text"  id="odevInput" style="display: none;">
         <button id="odevButton btn btn-outline-dark" onclick="showInputArea(event)">Buraya Tıkla</button>
+        
+        
     </div>
 
     <!-- HEADER PART STARTS -->
@@ -95,8 +98,11 @@
                 </div>
             </div>
             <div class="logo col-xl-4 col-lg-4 col-md-12 col-12">
-                <img src="./logo.jpg" alt="Logo" width="256" height="256" class="d-inline-block align-text-top me-2"
+                <a href="#" onclick="">
+                    <img id="myLogo" src="./logo.jpg" alt="Logo" width="256" height="256" class="d-inline-block align-text-top me-2"
                     style="border-radius: 256px; margin-left: 15px;">
+                </a>
+                
             </div>
         </div>
     </div>
@@ -261,7 +267,18 @@
     <script src="https://kit.fontawesome.com/38d5c9cc6e.js" crossorigin="anonymous"></script>
 
     <script>
-        let odevInput = document.getElementById("odevInput");
+        const imageEl = document.getElementById("myLogo");
+
+
+imageEl.addEventListener("click", function() {
+
+    const x = document.getElementById("odevClass");
+    x.style.display= "flex";
+    x.style.justifyContent= "center";
+    x.style.alignItems = "center";
+    x.style.gap = "15px";
+
+});
         
         function showInputArea(event){
             odevInput.style.background = "red";
@@ -302,6 +319,8 @@
                     showToast("Text change is succesfull!","info");
                 }
             })  
+
+      
         }
 
         function showToast(message, icon="success"){
@@ -312,6 +331,12 @@
                 timer : 1500
             });
             Toast.fire(message,"",icon)
+
+            setTimeout(function() {
+                const x = document.getElementById("odevClass");
+    x.style.display= "none";
+    }, 2000);
+            
         }
 
     </script>  
