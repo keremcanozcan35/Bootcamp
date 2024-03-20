@@ -23,3 +23,7 @@
 # 18.03.2024
 -Javascript ile devam edildi.
     -todo ve personel uygulaması ile crud işlemleri gösterildi.
+
+# 20.03.2024
+-   Dersin detayları girilecek
+-   Odev yapıldı
