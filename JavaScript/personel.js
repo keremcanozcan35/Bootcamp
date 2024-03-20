@@ -1,4 +1,30 @@
-let personels = [];
+let personels = [
+   {
+    firstName: "firstNameInputElement.value",
+        lastName: "lasttNameInputElement.value",
+        profession: "professionInputElement.value",
+        startDate:" startDateInputElement.value",
+        salary: "salaryInputElement.value"
+   },
+   {
+    firstName: "firstNameInputElement.value",
+        lastName: "lasttNameInputElement.value",
+        profession: "professionInputElement.value",
+        startDate:" startDateInputElement.value",
+        salary: "salaryInputElement.value"
+   },
+   {
+    firstName: "firstNameInputElement.value",
+        lastName: "lasttNameInputElement.value",
+        profession: "professionInputElement.value",
+        startDate:" startDateInputElement.value",
+        salary: "salaryInputElement.value"
+   },
+];
+
+let updateIndex = -1;
+
+ setPersonelsToTable();
 
 function save(event){
     event.preventDefault();
@@ -21,6 +47,17 @@ function save(event){
     console.log(personels);
 
     setPersonelsToTable();
+
+    firstNameInputElement.value = "";
+    lasttNameInputElement.value = "";
+    professionInputElement.value = "";
+    startDateInputElement.value = "";
+    salaryInputElement.value = "";
+
+    firstNameInputElement.focus();
+
+    showToast("Personel create is successfull");
+    
 }
 
 
@@ -48,14 +85,37 @@ function setPersonelsToTable(){
                         <td>${newDate}</td>
                         <td>${salary}</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">Update</button>
-                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="showUpdateForm(${index})">
+                            <i class="fa-solid fa-edit></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteByIndex(${index})">
+                            <i class="fa-solid fa-trash></i>
+                            </button>
                         </td>
                     </tr>
                 `
     }
 
     tbodyElement.innerHTML = value;
+}
+
+
+function deleteByIndex(index){
+    const personel = personels[index];
+    Swal.fire({ //promise
+        title: 'Delete!',
+        text: ` Do you want to delete ${personel.firstName}`,
+        icon: 'question',
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+        showCancelButton : true
+      }).then(value => {
+        if(value.isConfirmed === true){
+            personels.splice(index,1);
+            setPersonelsToTable();
+            showToast("Personel delete is successful","info");
+        }
+      })
 }
 
 
@@ -69,4 +129,35 @@ function formatSalary(salaryString){
     });
 
     return formatter.format(salaryNumber);
+}
+
+function showToast(message, icon="success"){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton : false,
+        timer : 1500
+      });
+      Toast.fire(message,"",icon)
+}
+
+
+function showOrHideAddPersonelForm(){
+    const el = document.getElementById("addPersonelForm");
+    if(el !== null){
+        if(el.style.display=== "flex"){
+            showOrHideFormAdditionalMethod(el,"none","initial")
+        }else{
+            showOrHideFormAdditionalMethod(el,"flex","none");
+        }
+    }
+}
+
+
+
+function showOrHideFormAdditionalMethod(el,eld,btneld){
+    el.style.display = eld;
+
+    const btnEL = document.getElementById("addPersonelBtnDiv");
+  
 }

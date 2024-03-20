@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 class="alert alert-success text-center">Personel App</h1>
-    <div class="row d-flex justify-content-center">
+    <div class="row  justify-content-center" style="display:none">
         <div class="col-xl-4 col-lg-6 col-md-12 col-12">
             <div class="card">
                 <div class="card-header">
@@ -44,11 +44,16 @@
                         </div>
                         <div class="form-group mt-2">
                             <button type="submit" class="btn btn-dark w-100">Save</button>
+                            <button type="button" class="btn btn-danger w-100">Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <div class="form-group" id="addPersonel">
+        <button onclick="showAdd()">Add Personel</button>
     </div>
 
     <hr>
@@ -73,14 +78,7 @@
         </table>
     </div>
 
-
-
-
-
-
-
-
-
     <script src="./personel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
