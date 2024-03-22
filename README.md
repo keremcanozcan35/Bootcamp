@@ -27,3 +27,8 @@
 # 20.03.2024
 -   Dersin detayları girilecek
 -   Odev yapıldı
+
+# 22.03.2024
+    -ecommerce devam edildi.
+    -localstorage işlendi.
+    -ikinci sayfaya item aktarma tamamlandı.
