@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Api</title>
+</head>
+<body>
+    <h1>Web Api</h1>
+    <button onclick="apiRequest()">Api isteği yap</button>
+
+    <script>
+        function apiRequest(){
+            console.log("Pazartesi")
+            fetch()
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                console.log("Salı");
+            })
+            console.log("çarşamba")
+        }
+    </script>
+</body>
+</html>

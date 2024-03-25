@@ -56,12 +56,16 @@
        
     }
 
+    .naber{
+        margin-top: 5rem!important;
+    }
+
 }
 
 @media screen and (max-width:849px) {
 
     .logo{
-        padding-left: 1rem!important;
+        padding-left: 15rem!important;
         padding-top: 10rem;
        
     }
@@ -77,14 +81,23 @@
 
 }
 
+
+
+@media screen and (max-width:475px) {
+
+    .logo{
+        padding-right: 22rem;
+        padding-left: 5rem!important;
+    }
+
+}
+
 body {
     width: 100%;
     position: absolute;
-    top: 150px;
     left: 0px;
     background-color: #848484;
     padding: 15px;
     border-radius: 10px;
     box-sizing: border-box;
-   
 }
