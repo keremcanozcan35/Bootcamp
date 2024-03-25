@@ -8,4 +8,10 @@ function formatCurrency(currency){
     });
 
     return formatter.format(currencyNumber);
+ 
+   
 }
+
+
+
+/** asdfsdfasf */
