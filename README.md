@@ -32,3 +32,12 @@
     -ecommerce devam edildi.
     -localstorage işlendi.
     -ikinci sayfaya item aktarma tamamlandı.
+
+# 23.03.2024
+    -ecommerce bitti
+    -spa anlatıldı
+
+# 25.03.2024
+    -json
+    -api istekleri
+    -npm kütüphaneleri
