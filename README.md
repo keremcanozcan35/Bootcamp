@@ -40,4 +40,4 @@
 # 25.03.2024
     -json
     -api istekleri
-    -npm kütüphaneleri
+    -npm kütüphaneleri  NPM İNSTALL -G JSON-SERVER  JSON-SERVER DOSYA_ADI.JSON
