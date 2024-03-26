@@ -9,24 +9,124 @@
     <h1>to do app</h1>
     <div>
         <input type="text" placeholder="work..." id="work">
-        <button> save</button>
+        <button onclick="save()"> save</button>
     </div>
+     <div>
+        <input type="text" placeholder="Work..." id="updateWork">
+        <button onclick="update()">Update</button>
+    </div> 
 
     <div>
         <ul id="ulEl">
-            <li>work1 </li>
-            <li>work2 </li>
-            <li>work3 </li>
+           
         </ul>
     </div>
 
     <script>
-        function save(){
-            const inputEl = document.getElementById("work");
-            const ulEl = document.getElementById("ulEl");
-            ulEl.innerHTML += "<li>" + inputEl.value + "</li> "
-           
+        let updateId = 0;
+        let todos = [];
+        getAll();
+
+        function getAll(){
+            fetch("http://localhost:3000/todos")
+            .then(res => res.json())
+            .then(data => {
+
+                todos = data;
+                setUlElementByTodos()
+            })
         }
-    </script>
+
+        function setUlElementByTodos(){
+            const ulEl = document.getElementById("ulEl");
+            ulEl.innerHTML = "";
+
+            for(let todo of todos){
+                ulEl.innerHTML += `
+                                    <li >
+                                        ${todo.value}
+                                        <button onclick="get('${todo.id}')">
+                                            Update
+                                        </button>
+                                        <button onclick="deleteById('${todo.id}')">
+                                            Delete
+                                        </button>
+                                    </li>    
+                                `
+            }
+        }
+
+      function save(){
+        const inputElement = document.getElementById("work");
+
+        const data = {
+            value : inputElement.value
+        }
+
+        fetch("http://localhost:3000/todos", {
+            method: "POST",
+            body: JSON.stringify(data),
+            contentType : "application/json"
+        }).then(res => res.json())
+        .then(data => {
+            getAll();
+            inputElement.value = "";
+        });
+       
+      }
+
+      function deleteById(id){
+
+        fetch(`http://localhost:3000/todos/${id}`, {
+            method: "DELETE",
+            contentType : "application/json"
+        }).then(res => {
+            getAll();
+        });
+       
+      }
+
+
+
+
+      function get(id){
+        updateId = id;
+        fetch(`http://localhost:3000/todos/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const el = document.getElementById("updateWork");
+            el.value = data.value;
+        })
+      }
+
+
+
+      function update(){
+        const el = document.getElementById("updateWork");
+
+        const data = {
+            id : updateId,
+            value: el.value
+        }
+
+
+        fetch(`http://localhost:3000/todos/${updateId}`,{
+            method: "PUT",
+            body: JSON.stringify(data),
+            contentType: "application/json"
+        })
+        .then(res =>{
+            el.value = "";
+            getAll();
+        })
+
+      }
+      
+      
+
+
+
+    
+      </script>
 </body>
 </html>
