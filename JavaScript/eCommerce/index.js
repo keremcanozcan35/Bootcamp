@@ -2,19 +2,21 @@ let products = []; //array
 const shoppingCards = [];
 let image = "";
 
-if(localStorage.getItem("products")){
-    products = JSON.parse(localStorage.getItem("products"));
-}
+// if(localStorage.getItem("products")){
+//     products = JSON.parse(localStorage.getItem("products"));
+// }
 
 setProductToHTML();
 setShoppingCardCountUsingLocalStorage();
 
 function setProductToHTML(){
+
+  fetch("./db.json").then(res => res.json()).then(val => {
     const productsRowElement = document.getElementById("productsRow");
     productsRowElement.innerHTML = "";
 
-    for(const index in products){
-        const product = products[index];
+    for(const index in val){
+        const product = val[index];
 
         let buttonText = `
           <button class="btn btn-danger w-100" disabled>
@@ -52,8 +54,10 @@ function setProductToHTML(){
 
         if(productsRowElement !== null){
             productsRowElement.innerHTML += text;
-        }
-    }
+        } }
+  })
+    
+   
 }
 
 function getImage(e){
@@ -73,7 +77,7 @@ function save(event){
     const nameElement = document.getElementById("name");
     const priceElement = document.getElementById("price");    
     const stockElement = document.getElementById("stock");
-    const id = products.length + 1;
+    //const id = products.length + 1;
 
     const product = {
         id: id,
@@ -83,11 +87,11 @@ function save(event){
         stock: stockElement.value
     };
 
-    products.push(product);
-
-    localStorage.setItem("products",JSON.stringify(products));
-
-    nameElement.value = "";
+    fetch("http://localhost:5001/products", {
+      method : "POST",
+      body : JSON.stringify(product)
+    }).then(res => {
+      nameElement.value = "";
     priceElement.value = "";
     stockElement.value = 0;
 
@@ -103,11 +107,19 @@ function save(event){
     }
     toastr.options = toastrOptions;
     toastr.success("Product add is successful");
+    })
+
+    //localStorage.setItem("products",JSON.stringify(products));
+
+    
     //warning | info | danger | success
 }
 
-function addShoppingCard(index){
-    const product = products[index]
+function addShoppingCard(product){
+  fetch("http://localhost:5001/shoppingcards", {
+    method : "POST",
+    body : JSON.stringify(product)
+  })
     shoppingCards.push(product);
 
     product.stock -= 1;
@@ -121,11 +133,12 @@ function addShoppingCard(index){
 
 function setShoppingCardCountUsingLocalStorage(){
     let cards = [];
-    if(localStorage.getItem("shoppingCards")){
-        cards = JSON.parse(localStorage.getItem("shoppingCards"));
-    }
+    
+    fetch("http://localhost:5001/shoppingcards").then(res => res.json()).then(val => {
+      cards = val;
+    })
 
     const shoppingCardCountElement = document.getElementById("shopping-card-count");
 
-    shoppingCardCountElement.innerHTML =cards.length;
+    shoppingCardCountElement.innerHTML =val.length;
 }

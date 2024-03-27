@@ -9,6 +9,17 @@ if(localStorage.getItem("shoppingCards")){
     }
 }
 
+function getAll(){
+  fetch("http://localhost:5001/shoppingcards").then(res => res.json())
+  .then(val => {
+    shoppingCards = val;
+
+    for(let card of shoppingCards){
+      totalAmount += +card.price;
+    }
+  })
+}
+
 setShoppingCardToHTML();
 setShoppingCardCountUsingLocalStorage();
 
