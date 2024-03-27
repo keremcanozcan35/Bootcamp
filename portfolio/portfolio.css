@@ -116,8 +116,6 @@ body {
 
 @media screen and (max-width:1166px) {
 
-
-
     .who{
         width: 80% !important;
        
@@ -125,9 +123,27 @@ body {
 
     .aq{
         padding-left: 0rem!important;
+        padding-top:5rem!important;
     }
 
+    #myLogo{
+        width: 400px !important;
+        height: 400px !important;
+    }
+
+    #aboutMeContent{
+        padding-left: 12rem;
+        padding-right: 12rem;
+    }
+
+    #progress{
+        padding-left: 12rem;
+        padding-right: 12rem;
+    }
+
+
 }
+
 
 
 @media screen and (max-width:1218px) {
@@ -139,3 +155,6 @@ body {
     }
 
 }
+
+
+
