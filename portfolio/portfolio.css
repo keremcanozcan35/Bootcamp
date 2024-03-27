@@ -1,9 +1,12 @@
 *{
     font-family: "Poppins", sans-serif;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
    
 }
 
-@media screen and (max-width:1594px) {
+/* @media screen and (max-width:1594px) {
     .contact-me{
         width: 48%!important;
     }
@@ -48,19 +51,7 @@
 
 }
 
-@media screen and (max-width:998px) {
 
-    .logo{
-        padding-left: 22rem!important;
-        padding-top: 10rem;
-       
-    }
-
-    .naber{
-        margin-top: 5rem!important;
-    }
-
-}
 
 @media screen and (max-width:849px) {
 
@@ -92,6 +83,20 @@
 
 }
 
+
+
+
+@media screen and (max-width:388px) {
+
+   
+
+    
+    .logo{
+        margin-left:0;
+    }
+
+}
+
 body {
     width: 100%;
     position: absolute;
@@ -100,4 +105,37 @@ body {
     padding: 15px;
     border-radius: 10px;
     box-sizing: border-box;
+} */
+
+
+
+/* .aboutMe .aboutMeContent{
+    font-size: clamp(12px, 4vw, 32px);
+} */
+
+
+@media screen and (max-width:1166px) {
+
+
+
+    .who{
+        width: 80% !important;
+       
+    }
+
+    .aq{
+        padding-left: 0rem!important;
+    }
+
+}
+
+
+@media screen and (max-width:1218px) {
+
+
+
+    .log{
+        width: 80% !important;
+    }
+
 }
