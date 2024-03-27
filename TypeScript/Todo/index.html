@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo App</title>
 </head>
 <body>
-
     <h1>Todo App</h1>
     <div>
         <input type="text" id="work">
         <button id="save">Kaydet</button>
     </div>
     <div>
-       <table>
-        <thead>
-            
-        </thead>
-       </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Work</th>
+                    <th>Created At</th>
+                    <th>Is Completed</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyEl">
+
+            </tbody>
+        </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="./script.ts"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

@@ -1,36 +1,58 @@
 declare const $:any;
 
-class TodoModel {
-    id: number = 0;
+class TodoModel{
+    id: number = setNewId();
     work: string = "";
     isCompleted: boolean = false;
-    createdDate : Date = new Date();
+    createdAt: Date = new Date();
 }
 
-const todos : TodoModel[] = [];
+const todos: TodoModel[] = []
 
-${"#save"}.on("click", save1);
+$("#save").on("click", save1);
 
 function save1(){
     const el = $("#work");
 
     const todo = new TodoModel();
     todo.work = el.val();
+
     todos.push(todo);
-    setLiElements();
+
+    el.val("");
+    el.focus();
+
+    setTRElements();
 }
 
-
-function setLiElements(){
-    const el = $("#ulEl");
+function setTRElements(){
+    const el = $("#tbodyEl");
     let html = "";
-    for(const todo of todos){
-        html += `<li>${todo.work}</li>`
+    for(let index in todos){
+        const todo = todos[index];
+
+        const date = todo.createdAt.getDate() + "." + (+(todo.createdAt.getMonth()) + 1)+ "." + todo.createdAt.getFullYear() + " " + todo.createdAt.getHours() + ":" + todo.createdAt.getMinutes();
+
+        html += `
+        <tr>
+        <td>${todo.id}</td>
+        <td>${todo.work}</td>
+        <td>${date}</td>
+        <td>${todo.isCompleted}</td>
+        <td>
+            <button>Delete</button>
+        </td>
+        </tr>`
     }
 
     el.html(html);
 }
 
-function on(arg0: string, save: (event: any) => void) {
-    throw new Error("Function not implemented.");
+function setNewId(){
+    return todos.length + 1;
 }
+
+
+type Icon = "Değer 1" | "Değer 2" | "Değer 3";
+
+const icon: Icon = "Değer 2";

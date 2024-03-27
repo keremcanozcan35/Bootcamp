@@ -92,8 +92,14 @@ body {
 @media screen and (max-width:890px) {
     
 
-    .oynak{
-        padding-right:2rem!important;
+    .oynak i{
+        margin: 1rem!important;
+        padding-right:1rem!important;
+    }
+
+    #progress{
+        padding-left: 8rem;
+        width: 90%;
     }
 
 }
