@@ -1,22 +1,19 @@
-let products = []; //array
-const shoppingCards = [];
+let products = [];
 let image = "";
-
-// if(localStorage.getItem("products")){
-//     products = JSON.parse(localStorage.getItem("products"));
-// }
 
 setProductToHTML();
 setShoppingCardCountUsingLocalStorage();
 
-function setProductToHTML(){
+async function setProductToHTML(){
+  const result = await axios.get("http://localhost:5001/products");
 
-  fetch("./db.json").then(res => res.json()).then(val => {
-    const productsRowElement = document.getElementById("productsRow");
-    productsRowElement.innerHTML = "";
+  products = result.data;
 
-    for(const index in val){
-        const product = val[index];
+  const productsRowElement = $("#productsRow");
+    productsRowElement.html("");
+  let html = "";
+    for(const index in products){
+        const product = products[index];
 
         let buttonText = `
           <button class="btn btn-danger w-100" disabled>
@@ -40,7 +37,7 @@ function setProductToHTML(){
             <img src="${product.image}" alt="" style="width: 100%; max-height:100%">
           </div>
           <div class="card-header product-name-div" style="flex-direction: column">
-            <h6>${product.name.substring(0,84)}</h6>
+            <h6>${product.name}</h6>
             <span>Stock: ${product.stock}</span>
           </div>
           <div class="card-body text-center">
@@ -52,12 +49,10 @@ function setProductToHTML(){
         </div>
         </div>`
 
-        if(productsRowElement !== null){
-            productsRowElement.innerHTML += text;
-        } }
-  })
-    
-   
+        html += text;       
+    };  
+
+    productsRowElement.html(html);
 }
 
 function getImage(e){
@@ -72,73 +67,38 @@ function getImage(e){
   reader.readAsDataURL(file);
 }
 
-function save(event){
-    event.preventDefault();
+async function save(e){
+    e.preventDefault();
     const nameElement = document.getElementById("name");
     const priceElement = document.getElementById("price");    
     const stockElement = document.getElementById("stock");
     //const id = products.length + 1;
 
     const product = {
-        id: id,
+        //id: id,
         name: nameElement.value,
         price: priceElement.value,
         image: image,
         stock: stockElement.value
     };
 
-    fetch("http://localhost:5001/products", {
-      method : "POST",
-      body : JSON.stringify(product)
-    }).then(res => {
-      nameElement.value = "";
-    priceElement.value = "";
-    stockElement.value = 0;
-
-    const closeBtnElement = document.getElementById("addProductModalCloseBtn");
-    closeBtnElement.click();
-
-    setProductToHTML();
-
-    const toastrOptions = {
-        closeButton: true,
-        progressBar: true,
-        positionClass: "toast-bottom-right"
-    }
-    toastr.options = toastrOptions;
-    toastr.success("Product add is successful");
-    })
-
-    //localStorage.setItem("products",JSON.stringify(products));
-
-    
-    //warning | info | danger | success
+    await axios.post("http://localhost:5001/products", product);
 }
 
-function addShoppingCard(product){
-  fetch("http://localhost:5001/shoppingcards", {
-    method : "POST",
-    body : JSON.stringify(product)
-  })
-    shoppingCards.push(product);
+async function addShoppingCard(index){
+  const product = products[index];
+  await axios.post("http://localhost:5001/shoppingcards", product);
 
-    product.stock -= 1;
+  product.stock--;
+  await axios.put("http://localhost:5001/products/" + product.id,product);
 
-    localStorage.setItem("shoppingCards", JSON.stringify(shoppingCards));
-    localStorage.setItem("products", JSON.stringify(products));
-
-    setProductToHTML();
-    setShoppingCardCountUsingLocalStorage();
+  
 }
 
-function setShoppingCardCountUsingLocalStorage(){
-    let cards = [];
-    
-    fetch("http://localhost:5001/shoppingcards").then(res => res.json()).then(val => {
-      cards = val;
-    })
+async function setShoppingCardCountUsingLocalStorage(){
+    const result = await axios.get("http://localhost:5001/shoppingcards");
 
-    const shoppingCardCountElement = document.getElementById("shopping-card-count");
+    const val = result.data;
 
-    shoppingCardCountElement.innerHTML =val.length;
+    $("#shopping-card-count").html(val.length);
 }
