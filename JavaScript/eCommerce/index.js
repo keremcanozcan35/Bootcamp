@@ -102,3 +102,6 @@ async function setShoppingCardCountUsingLocalStorage(){
 
     $("#shopping-card-count").html(val.length);
 }
+
+
+

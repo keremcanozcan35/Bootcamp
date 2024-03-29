@@ -41,3 +41,12 @@
     -json
     -api istekleri
     -npm kütüphaneleri  NPM İNSTALL -G JSON-SERVER  JSON-SERVER DOSYA_ADI.JSON
+
+# 27.03.2024
+    -axios
+    -jquery
+    -ecommerce with json server ve api
+
+# 29.03.2024
+    -ts ile cli yapma
+    -angular başlangıç
