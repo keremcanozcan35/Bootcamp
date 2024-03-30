@@ -50,3 +50,8 @@
 # 29.03.2024
     -ts ile cli yapma
     -angular başlangıç
+
+# 30.03.2024
+    -angular devam
+    -todo projesi
+    -angular component yapısı
