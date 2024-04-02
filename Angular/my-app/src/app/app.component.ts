@@ -34,10 +34,17 @@ export class AppComponent {
   }
 
   save() {
+
+    const uniqueId = this.generateUniqueId();
+
+    // Assign the generated ID to the addModel
+    this.addModel.id = uniqueId;
     this.http.post('http://localhost:5001/todos', this.addModel)
       .subscribe(res => {
         this.getAll();
         this.addModel = new TodoModel();
+
+      
 
         Swal.fire({
           title: 'Create is successful!',
@@ -50,6 +57,9 @@ export class AppComponent {
         })
       })
 
+  }
+  generateUniqueId() {
+    return Math.random().toString(36).substr(2, 9); // This is just a simple example, not guaranteed unique
   }
 
   get(index: number) {

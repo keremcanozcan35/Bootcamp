@@ -4,7 +4,7 @@
       "id": "6568",
       "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quos magnam voluptatum officia quae est voluptates ab explicabo sapiente, placeat repellendus magni sit eum ipsum quas reprehenderit voluptatibus expedita nulla?",
       "taskTitle": "Task Title",
-      "isCompleted": true
+      "isCompleted": false
     },
     {
       "id": "6569",
@@ -32,14 +32,25 @@
     },
     {
       "id": "",
-      "text": "do your best",
-      "taskTitle": "TrexTEST101",
+      "text": "213123123",
+      "taskTitle": "2123123",
       "isCompleted": false
     },
     {
       "id": "",
-      "text": "-Ekg - kan",
-      "taskTitle": "KEREMCANOZCAN ",
+      "text": "adasd",
+      "taskTitle": "asdasds",
+      "isCompleted": false
+    },
+    {
+      "id": "asdas",
+      "text": "",
+      "taskTitle": "",
+      "isCompleted": false
+    },
+    {
+      "id": "",
+      "work": "asdf",
       "isCompleted": false
     }
   ]
