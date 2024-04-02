@@ -24,7 +24,7 @@ body {
 @media screen and (max-width:1700px) {
     
     .aq{
-        padding-top: 10rem!important;
+        padding-top: 3rem!important;
     }
 
 
@@ -136,4 +136,14 @@ body {
         object-fit: cover;
         border: solid black 10px;
     }
+}
+
+
+@media (max-width: 450px) {
+    #myLogo {
+        width: 300px!important;
+        height: 300px!important;
+    }
+
+    
 }
