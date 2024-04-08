@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CategoryPipe } from '../pipes/category.pipe';
@@ -71,15 +71,18 @@ export class HomeComponent {
   productSearch: string = "";
   selectedCategoryId: string = "";
 
+
+
   /**
    *
    */
   constructor(private cart: ShoppingCartService) {
-    
-    
+  
   }
 
-  selectCategory(id:string = ""){
+
+
+  selectCategory(id: string = "") {
     this.selectedCategoryId = id;
   }
 

@@ -6,5 +6,6 @@ import { ShoppingCartModel } from '../components/models/shopping-cart.model';
 })
 export class ShoppingCartService {
   shoppingCarts : ShoppingCartModel[] = []
+  currentMessage:any = "";
   constructor() { }
 }

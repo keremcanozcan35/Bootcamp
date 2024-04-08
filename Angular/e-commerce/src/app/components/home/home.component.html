@@ -27,7 +27,7 @@
 
     <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 mt-1">
         <app-search (changeSearch)="productSearch = $event"></app-search>
-
+        
         <div class="form-group mt-1">
             <div class="row">
                 @for(product of products | product: selectedCategoryId:productSearch; track product){
