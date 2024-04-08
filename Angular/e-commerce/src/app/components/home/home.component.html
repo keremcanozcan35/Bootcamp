@@ -5,77 +5,107 @@
     </ol>
 </nav>
 
+@if(_product.products.length === 0) {
+<div class="row mt-2">
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 mt-1">
+        <ul class="list-group">
+            <li class="list-group-item placeholder-glow">
+                <input class=" form-control placeholder">
+            </li>
+            <li class="list-group-item placeholder-glow">
+                <span class="  placeholder">Category Category</span>
+            </li>
+            <li class="list-group-item placeholder-glow">
+                <span class=" placeholder">Category Category</span>
+            </li>
+            <li class="list-group-item placeholder-glow">
+                <span class="  placeholder">Category Category</span>
+            </li>
+            <li class="list-group-item placeholder-glow">
+                <span class="  placeholder">Category Category</span>
+            </li>
+
+            <span style="font-size: small;">We found {{categories.length}} category</span>
+        </ul>
+    </div>
+</div>
+}@else {
 <div class="row mt-2">
     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 mt-1">
         <ul class="list-group">
             <li class="list-group-item">
-               <app-search (changeSearch)="categorySearch = $event"></app-search>
+                <app-search (changeSearch)="categorySearch = $event"></app-search>
             </li>
             @if(categorySearch === ""){
-                <li class="list-group-item" (click)="selectCategory()" [ngClass]="selectedCategoryId === '' ? 'active' : ''">
-                    All
-                </li>
+            <li class="list-group-item" (click)="selectCategory()"
+                [ngClass]="selectedCategoryId === '' ? 'active' : ''">
+                All
+            </li>
             }
             @for(category of categories | category:categorySearch; track category){
-                <li class="list-group-item" (click)="selectCategory(category.id)" [ngClass]="selectedCategoryId === category.id ? 'active' : ''">
-                    {{category.name}}
-                </li>
+            <li class="list-group-item" (click)="selectCategory(category.id)"
+                [ngClass]="selectedCategoryId === category.id ? 'active' : ''">
+                {{category.name}}
+            </li>
             }
             <span style="font-size: small;">We found {{categories.length}} category</span>
         </ul>
     </div>
-
     <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 mt-1">
         <app-search (changeSearch)="productSearch = $event"></app-search>
-        
+
         <div class="form-group mt-1">
             <div class="row">
-                @for(product of products | product: selectedCategoryId:productSearch; track product){
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-1">
-                        <div class="card">
-                            <div class="card-header position-relative">
-                                <div>
-                                    <img src="{{product.imageUrl}}"
-                                        class="card-img-top" style="width: 100%; object-fit: cover;">
-                                </div>
-                                <span class="text-light" style="background-color: rgb(220,53,69); color: white; position: absolute; right: 10px; bottom: 10px; font-size: 10px; padding: 2px; border-radius: 5px;">
-                                    Stock: {{product.stock}}
-                                </span>
+                @for(product of _product.products| product: selectedCategoryId:productSearch; track product){
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-1">
+                    <div class="card">
+                        <div class="card-header position-relative">
+                            <div>
+                                <img src="{{product.imageUrl}}" class="card-img-top"
+                                    style="width: 100%; object-fit: cover;">
                             </div>
-                            <div class="card-body text-center">
-                                <h6 class="card-title" title="{{product.name}}">{{
-                                        product.name.length >= 19 
-                                        ? product.name.substring(0,19) + '..' 
-                                        : product.name}}</h6>
-                                <span style="font-size: smaller; background-color: #f1f1f1; padding: 2px 8px;">
-                                    {{product.category.name}}
-                                </span>
-                                <p style="font-size: small;">{{product.description}} </p>
-                                <div>
-                                    <span class="text-danger me-3"><del>{{product.price | trCurrency: '₺': true}}</del></span>
-                                    <span class="text-success">{{product.discountedPrice | trCurrency: '₺': true}}</span>
-                                </div>
-                            </div>
-                            <div class="card-header">
-                                @if (product.stock >0) {
-                                <button class="btn btn-dark w-100 d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center" style="gap: 10px;">
-                                        <i class="fa-solid fa-minus ibtn" (click)="decrementProductQuantity(product)"></i>
-                                        <input type="number" style="width: 30px; height: 25px; text-align: center;" [(ngModel)]="product.quantity">
-                                        <i class="fa-solid fa-plus ibtn" (click)="incrementProductQuantity(product)"></i>
-                                    </div>
-                                    <i class="fa-solid fa-cart-plus" (click)="(addShoppingCart(product))"></i>
-                                </button>
-                                }@else{
-                                <button class="btn btn-danger w-100 disabled">
-                                    Out of stock
-                                </button>
-                                }
+                            <span class="text-light"
+                                style="background-color: rgb(220,53,69); color: white; position: absolute; right: 10px; bottom: 10px; font-size: 10px; padding: 2px; border-radius: 5px;">
+                                Stock: {{product.stock}}
+                            </span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h6 class="card-title" title="{{product.name}}">{{
+                                product.name.length >= 19
+                                ? product.name.substring(0,19) + '..'
+                                : product.name}}</h6>
+                            <span style="font-size: smaller; background-color: #f1f1f1; padding: 2px 8px;">
+                                {{product.category.name}}
+                            </span>
+                            <p style="font-size: small;">{{product.description}} </p>
+                            <div>
+                                <span class="text-danger me-3"><del>{{product.price | trCurrency: '₺':
+                                        true}}</del></span>
+                                <span class="text-success">{{product.discountedPrice | trCurrency: '₺': true}}</span>
                             </div>
                         </div>
+                        <div class="card-header">
+                            @if (product.stock >0) {
+                            <button class="btn btn-dark w-100 d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                    <i class="fa-solid fa-minus ibtn" (click)="decrementProductQuantity(product)"></i>
+                                    <input type="number" style="width: 30px; height: 25px; text-align: center;"
+                                        [(ngModel)]="product.quantity">
+                                    <i class="fa-solid fa-plus ibtn" (click)="incrementProductQuantity(product)"></i>
+                                </div>
+                                <i class="fa-solid fa-cart-plus" (click)="(addShoppingCart(product))"></i>
+                            </button>
+                            }@else{
+                            <button class="btn btn-danger w-100 disabled">
+                                Out of stock
+                            </button>
+                            }
+                        </div>
                     </div>
+                </div>
                 }
             </div>
         </div>
     </div>
 </div>
+}

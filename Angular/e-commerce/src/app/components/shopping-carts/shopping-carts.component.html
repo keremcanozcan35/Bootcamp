@@ -6,15 +6,14 @@
     </ol>
 </nav>
 
+@if(cart.shoppingCarts.length > 0){
 <div class="row mt-2">
     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9-col-12">
         <div class="card">
             <div class="card-header">
-               
                 <app-search (changeSearch)="shoppingCartSearch = $event"></app-search>
             </div>
             <div class="card-body">
-              
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -23,46 +22,35 @@
                             <th>Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Stock</th>
+                            <th>Total</th>
                             <th>Operations</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (item of productsFromHomePage | shoppingCart : shoppingCartSearch; track item) {
+                        @for (item of cart.shoppingCarts | shoppingCart : shoppingCartSearch; track item) {
                         <tr>
-                            
-                            <td>{{item.id}}</td>
+                            <td>{{$index + 1}}</td>
                             <td>
-                                <img width="50"
-                                    src="{{item.imageUrl}}">
-                            </td>       
+                                <img width="50" src="{{item.imageUrl}}">
+                            </td>
                             <td>{{item.name}}</td>
-                            <td>{{item.discountedPrice}}</td>
+                            <td>{{item.price | trCurrency: '₺':true}}</td>
                             <td>
-                                <div class="card-header">
-                                    <button class="btn btn-dark w-100 d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center" style="gap: 10px;">
-                                            <button>
-                                                <i class="fa-solid fa-minus ibtn" (click)="decrement(item)"></i>
-                                            </button>
-                                            
-                                            <input type="number" style="width: 40px; height: 25px; text-align: center;" [(ngModel)]="item.quantity">
-                                            <button>
-                                                <i class="fa-solid fa-plus ibtn" (click)="increment(item)"></i>
-                                            </button>
-                                        </div>
-                                    </button>
+                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                    <i class="fa-solid fa-minus ibtn" (click)="decrement(item, $index)"></i>
+                                    <input type="number" disabled style="width: 50px; height: 25px; text-align: center; user-select: none;"
+                                        [(ngModel)]="item.quantity">
+                                    <i class="fa-solid fa-plus ibtn" (click)="increment(item)"></i>
                                 </div>
                             </td>
-                            <td>{{item.stock}}</td>
+                            <td>{{item.discountedPrice * item.quantity | trCurrency:'₺':true}}</td>
                             <td>
                                 <button class="btn btn-sm btn-outline-danger">
                                     <i class="fa-solid fa-trash" (click)="deleteByIndex($index)"></i>
                                 </button>
                             </td>
-                        
                         </tr>
-                    }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -71,7 +59,34 @@
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3-col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="alert alert-success">$12.499</h2>
+                <table class="table">
+                    <tr>
+                        <th>Total amount</th>
+                        <td>{{totalAmount | trCurrency:'₺':true}}</td>
+                    </tr>
+                    @if(totalKDV1) {
+                    <tr>
+                        <th>Total KDV1</th>
+                        <td>{{totalKDV1 | trCurrency:'₺':true}}</td>
+                    </tr>
+                    }
+                    @if(totalKDV10) {
+                    <tr>
+                        <th>Total KDV10</th>
+                        <td>{{totalKDV10 | trCurrency:'₺':true}}</td>
+                    </tr>
+                    }
+                    @if(totalKDV1) {
+                    <tr>
+                        <th>Total KDV20</th>
+                        <td>{{totalKDV20 | trCurrency:'₺':true}}</td>
+                    </tr>
+                    }
+                    <tr>
+                        <th>Total</th>
+                        <td class="text-danger">{{total | trCurrency:'₺':true}}</td>
+                    </tr>
+                </table>
             </div>
             <div class="card-body">
                 <form>
@@ -104,3 +119,6 @@
         </div>
     </div>
 </div>
+}@else {
+<h4 class="alert alert-primary">There no item in shopping carts</h4>
+}
