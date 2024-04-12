@@ -2,7 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { HomeComponent } from '../home/home.component';
 import { ProductModel } from '../models/product.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { ShoppingCartModel } from '../models/shopping-cart.model';
 import { ProductPipe } from '../pipes/product.pipe';
@@ -10,6 +10,8 @@ import { ShoppingCartPipe } from "../pipes/shopping-cart.pipe";
 import { BehaviorSubject } from 'rxjs';
 import { TrCurrencyPipe } from 'tr-currency';
 import { ProductService } from '../../services/product.service';
+import { OrderModel } from '../models/order.model';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-shopping-carts',
@@ -29,7 +31,8 @@ export class ShoppingCartsComponent implements OnInit {
   totalKDV10: number = 0;
   totalKDV20: number = 0;
 
-  constructor(public cart: ShoppingCartService, private _product: ProductService) { }
+
+  constructor(public cart: ShoppingCartService, private _product: ProductService, private _order: OrderService) { }
 
   ngOnInit(): void {
     this.calculateTotal();
@@ -92,4 +95,51 @@ export class ShoppingCartsComponent implements OnInit {
     this.cart.shoppingCarts.splice(index, 1);
     this.calculateTotal();
   }
+
+  pay(form:NgForm) {
+    if(form.valid){
+      for(const data of this.cart.shoppingCarts){
+        const amount = data.quantity * data.discountedPrice;
+        const kdv = amount - amount / ((data.kdvRate / 100) + 1);
+
+        let lastOrderSuffix = 0;
+        if(this._order.orders.length > 0){
+          lastOrderSuffix = this._order.orders[this._order.orders.length - 1].orderNumberSuffix;
+        }
+
+        const order: OrderModel = {
+          id: "123",
+          date: new Date().toString(),
+          kdvRate: data.kdvRate,
+          price: data.price,
+          productName: data.name,
+          productDescription: data.description,
+          quantity: data.quantity,
+          imgUrl: data.imageUrl,
+          total: amount,
+          totalAmount: amount-kdv,
+          totalKDV:kdv,
+          orderNumberPrefix: "KCO" + new Date().getFullYear(),
+          orderNumberSuffix: lastOrderSuffix + 1,
+          orderNumber: ""
+        };
+
+        // let orderNumberSuffixString = order.orderNumberSuffix.toString();
+        // let i = order.orderNumberSuffix.toString().length;
+
+        // for(i; i< 10 ; i++){
+        //   orderNumberSuffixString = "0" + orderNumberSuffixString;
+        // }
+
+        order.orderNumber = order.orderNumberPrefix + order.orderNumberSuffix.toString().padStart(9, '0');
+
+        //order.orderNumber = order.orderNumberPrefix + order.orderNumberSuffix;
+        this._order.orders.push(order);
+
+      }
+      this.cart.shoppingCarts = [];
+    }
+  }
+
+
 }
