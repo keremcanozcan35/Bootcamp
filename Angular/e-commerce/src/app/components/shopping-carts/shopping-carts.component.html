@@ -7,7 +7,7 @@
     </ol>
 </nav>
 
-@if(cart.shoppingCarts.length > 0){
+@if(_cart.shoppingCarts.length > 0){
 <div class="row mt-2">
     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9-col-12">
         <div class="card">
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (item of cart.shoppingCarts | shoppingCart : shoppingCartSearch; track item) {
+                        @for (item of _cart.shoppingCarts | shoppingCart : shoppingCartSearch; track item) {
                         <tr>
                             <td>{{$index + 1}}</td>
                             <td>
@@ -38,8 +38,9 @@
                             <td>{{item.price | trCurrency: '₺':true}}</td>
                             <td>
                                 <div class="d-flex align-items-center" style="gap: 10px;">
-                                    <i class="fa-solid fa-minus ibtn" (click)="decrement(item, $index)"></i>
-                                    <input type="number" disabled style="width: 50px; height: 25px; text-align: center; user-select: none;"
+                                    <i class="fa-solid fa-minus ibtn" (click)="decrement(item)"></i>
+                                    <input type="number" disabled
+                                        style="width: 50px; height: 25px; text-align: center; user-select: none;"
                                         [(ngModel)]="item.quantity">
                                     <i class="fa-solid fa-plus ibtn" (click)="increment(item)"></i>
                                 </div>
@@ -63,29 +64,29 @@
                 <table class="table">
                     <tr>
                         <th>Total amount</th>
-                        <td>{{totalAmount | trCurrency:'₺':true}}</td>
+                        <td>{{_cart.totalAmount | trCurrency:'₺':true}}</td>
                     </tr>
-                    @if(totalKDV1) {
+                    @if(_cart.totalKDV1) {
                     <tr>
                         <th>Total KDV1</th>
-                        <td>{{totalKDV1 | trCurrency:'₺':true}}</td>
+                        <td>{{_cart.totalKDV1 | trCurrency:'₺':true}}</td>
                     </tr>
                     }
-                    @if(totalKDV10) {
+                    @if(_cart.totalKDV10) {
                     <tr>
                         <th>Total KDV10</th>
-                        <td>{{totalKDV10 | trCurrency:'₺':true}}</td>
+                        <td>{{_cart.totalKDV10 | trCurrency:'₺':true}}</td>
                     </tr>
                     }
-                    @if(totalKDV1) {
+                    @if(_cart.totalKDV1) {
                     <tr>
                         <th>Total KDV20</th>
-                        <td>{{totalKDV20 | trCurrency:'₺':true}}</td>
+                        <td>{{_cart.totalKDV20 | trCurrency:'₺':true}}</td>
                     </tr>
                     }
                     <tr>
                         <th>Total</th>
-                        <td class="text-danger">{{total | trCurrency:'₺':true}}</td>
+                        <td class="text-danger">{{_cart.total | trCurrency:'₺':true}}</td>
                     </tr>
                 </table>
             </div>
@@ -97,16 +98,16 @@
                     </div>
                     <div class="form-group mt-1">
                         <label>Card Number</label>
-                        <input type="text" class="form-control"  name="cardNumber" ngModel>
+                        <input type="text" class="form-control" name="cardNumber" ngModel>
                     </div>
                     <div class="row form-group mt-1">
                         <div class="col-6">
                             <label>Expiration Date</label>
-                            <input type="text" class="form-control"  name="expirationDate" ngModel>
+                            <input type="text" class="form-control" name="expirationDate" ngModel>
                         </div>
                         <div class="col-6">
                             <label>CCV</label>
-                            <input type="text" class="form-control"  name="CCV" ngModel>
+                            <input type="text" class="form-control" name="CCV" ngModel>
                         </div>
                     </div>
                     <div class="form-group mt-1">

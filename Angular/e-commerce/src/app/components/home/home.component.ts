@@ -9,6 +9,8 @@ import { SearchComponent } from '../search/search.component';
 import { TrCurrencyPipe } from 'tr-currency';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { ProductService } from '../../services/product.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ShoppingCartModel } from '../models/shopping-cart.model';
 
 @Component({
   selector: 'app-home',
@@ -24,12 +26,22 @@ export class HomeComponent {
   productSearch: string = "";
   selectedCategoryId: string = "";
 
-  constructor(private cart: ShoppingCartService,
-    public _product: ProductService
+  constructor(private _cart: ShoppingCartService,
+    public _product: ProductService,
+    private _http: HttpClient
   ) {
-    setTimeout(() => {
-      this.seedData();
-    }, 1000);
+    this.getAllCategories();
+  }
+
+  getAllCategories() {
+    this._http.get<CategoryModel[]>("http://localhost:5000/categories").subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    });
   }
 
   selectCategory(id: string = "") {
@@ -51,30 +63,59 @@ export class HomeComponent {
   addShoppingCart(product: ProductModel) {
     const productModel = { ...product };
 
-    const model = this.cart.shoppingCarts.find(x => x.id == product.id);
+    const model = this._cart.shoppingCarts.find(x => x.productId == product.id);
     if (model === undefined) {
-      this.cart.shoppingCarts.push(productModel);
+      //Eğer sepete eklenen ürün sepette yoksa ürünü sepete ekle.
+      const cart: ShoppingCartModel = {
+        productId: product.id,
+        categoryId: product.categoryId,
+        description: product.description,
+        discountedPrice: product.discountedPrice,
+        imageUrl: product.imageUrl,
+        kdvRate: product.kdvRate,
+        name: product.name,
+        price: product.price,
+        quantity: productModel.quantity,
+        category: product.category,
+        id: undefined
+      };
+
+      this._http.post("http://localhost:5000/shoppingCarts/", cart).subscribe({
+        next: () => {
+          this._cart.getAll();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
     } else {
+
+      //eğer sepette ürün varsa adedini güncelle ve api isteği ile kayıtta bilgisini değiştir
       model.quantity += productModel.quantity;
+
+      this._http.put("http://localhost:5000/shoppingCarts/" + model.id, model).subscribe({
+        next: () => {
+          this._cart.getAll();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
+
     }
 
     product.stock -= product.quantity;
+
+
+    this._http.put("http://localhost:5000/products/" + product.id, product).subscribe({
+      next: () => {
+        this._cart.getAll();
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    });
+
   }
 
-  seedData() {
-    this.categories = [
-      {
-        id: "1",
-        name: "Elektronik"
-      },
-      {
-        id: "2",
-        name: "Meyve & Sebze"
-      },
-      {
-        id: "3",
-        name: "Kıyafet"
-      }
-    ];
-  }
 }

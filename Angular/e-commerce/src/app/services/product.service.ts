@@ -9,20 +9,20 @@ export class ProductService {
 
   products: ProductModel[] = []
 
-  constructor(private http: HttpClient) {
-    this.getAll();
+  constructor(private _http: HttpClient) {
+    this.getAll();  //2.46.25
   }
 
-  getAll(){
-    this.http.get<ProductModel[]>("http://localhost:5000/products").subscribe({
-      next: (res)=>{
+  getAll() {
+    this._http.get<ProductModel[]>("http://localhost:5000/products").subscribe({
+      next: (res) => {
         this.products = res;
       },
-      error: (err:HttpErrorResponse) => {
+      error: (err: HttpErrorResponse) => {
         console.log(err);
       }
-    }) 
+    })
   }
 
- 
+
 }
