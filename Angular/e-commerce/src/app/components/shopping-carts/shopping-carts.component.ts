@@ -68,7 +68,7 @@ export class ShoppingCartsComponent {
     if (product !== undefined) {
       product.stock += cart.quantity;
 
-      this._http.put("http://localhost:5000/products/" + product.id, product).subscribe({
+      this._http.put(`products/$(product.id)`, product).subscribe({
         next: () => {
           this._product.getAll();
         },

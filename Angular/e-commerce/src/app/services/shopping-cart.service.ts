@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ShoppingCartModel } from '../components/models/shopping-cart.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +17,27 @@ export class ShoppingCartService {
   totalKDV20: number = 0;
 
   currentMessage:any = "";
-  constructor(private _htpp : HttpClient) {
+  constructor(private _htpp : HttpService) {
     this.getAll();
    }
    
    getAll(){
-     this._htpp.get<ShoppingCartModel[]>('http://localhost:5000/shoppingCarts').subscribe({
-       next: (res) => {
-         this.shoppingCarts = res;
-         this.calculateTotal();
-       },
-       error: (err: HttpErrorResponse) => {
-         console.log(err);
-       }
-     })
-   }
+     this._htpp.get<ShoppingCartModel[]>("shoppingCarts", (res) => {
+       this.shoppingCarts = res;
+       this.calculateTotal();
+     });
+    }
+     
+  //    .subscribe({
+  //      next: (res) => {
+  //        this.shoppingCarts = res;
+  //        this.calculateTotal();
+  //      },
+  //      error: (err: HttpErrorResponse) => {
+  //        console.log(err);
+  //      }
+  //    })
+  //  }
 
    calculateTotal() {
     this.total = 0;
